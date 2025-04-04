@@ -4925,6 +4925,8 @@
       <field type="uint8_t" name="param_type" enum="MAV_PARAM_TYPE">Onboard parameter type.</field>
       <field type="uint16_t" name="param_count">Total number of onboard parameters</field>
       <field type="uint16_t" name="param_index">Index of this onboard parameter</field>
+      <extensions/>
+      <field type="uint8_t" name="param_component_id">Component ID of onboard parameter.</field>
     </message>
     <message id="23" name="PARAM_SET">
       <description>Set a parameter value (write new value to permanent storage).
