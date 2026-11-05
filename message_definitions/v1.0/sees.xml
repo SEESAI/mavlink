@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<mavlink>
+  <!-- Sees.ai custom MAVLink dialect.                                         -->
+  <!-- Company URL: https://www.sees.ai                                        -->
+  <!-- MAVLink ID range: 13000 - 13999                                         -->
+  <!-- Includes development.xml (PX4's default dialect) so that all standard   -->
+  <!-- definitions remain available. See doc/sees/sees_gps_input_proposal.md.  -->
+  <include>development.xml</include>
+  <messages>
+    <message id="13000" name="SEES_GPS_INPUT">
+      <description>Sees variant of GPS_INPUT, adding course/heading accuracy and UTC time. All fields up to and including yaw have identical semantics to GPS_INPUT. This is a raw sensor value sent by the GPS. This is NOT the global position estimate of the system.</description>
+      <field type="uint64_t" name="time_usec" units="us">Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude of the number.</field>
+      <field type="uint8_t" name="gps_id" instance="true">ID of the GPS for multiple GPS inputs</field>
+      <field type="uint16_t" name="ignore_flags" enum="GPS_INPUT_IGNORE_FLAGS">Bitmap indicating which GPS input flags fields to ignore.  All other fields must be provided.</field>
+      <field type="uint32_t" name="time_week_ms" units="ms">GPS time (from start of GPS week)</field>
+      <field type="uint16_t" name="time_week">GPS week number</field>
+      <field type="uint8_t" name="fix_type">0-1: no fix, 2: 2D fix, 3: 3D fix. 4: 3D with DGPS. 5: 3D with RTK</field>
+      <field type="int32_t" name="lat" units="degE7">Latitude (WGS84)</field>
+      <field type="int32_t" name="lon" units="degE7">Longitude (WGS84)</field>
+      <field type="float" name="alt" units="m">Altitude (MSL). Positive for up.</field>
+      <field type="float" name="hdop" invalid="UINT16_MAX">GPS HDOP horizontal dilution of position (unitless). If unknown, set to: UINT16_MAX</field>
+      <field type="float" name="vdop" invalid="UINT16_MAX">GPS VDOP vertical dilution of position (unitless). If unknown, set to: UINT16_MAX</field>
+      <field type="float" name="vn" units="m/s">GPS velocity in north direction in earth-fixed NED frame</field>
+      <field type="float" name="ve" units="m/s">GPS velocity in east direction in earth-fixed NED frame</field>
+      <field type="float" name="vd" units="m/s">GPS velocity in down direction in earth-fixed NED frame</field>
+      <field type="float" name="speed_accuracy" units="m/s">GPS speed accuracy</field>
+      <field type="float" name="horiz_accuracy" units="m">GPS horizontal accuracy</field>
+      <field type="float" name="vert_accuracy" units="m">GPS vertical accuracy</field>
+      <field type="uint8_t" name="satellites_visible">Number of satellites visible.</field>
+      <field type="uint16_t" name="yaw" units="cdeg">Yaw of vehicle relative to Earth's North, zero means not available, use 36000 for north</field>
+      <field type="float" name="course_accuracy" units="rad" invalid="NaN">GPS course over ground accuracy (1-sigma). If unknown, set to: NaN</field>
+      <field type="float" name="heading_accuracy" units="rad" invalid="NaN">GPS heading accuracy (1-sigma). If unknown, set to: NaN</field>
+      <field type="uint64_t" name="time_utc_usec" units="us" invalid="0">GPS UTC time (UNIX Epoch). If unknown, set to: 0</field>
+    </message>
+  </messages>
+</mavlink>
