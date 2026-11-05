@@ -1,4 +1,4 @@
-# Proposal: `SEES_GPS_INPUT` message in a Sees MAVLink dialect
+# `SEES_GPS_INPUT` message in a Sees MAVLink dialect
 
 **Status:** Implemented in this repo ([`message_definitions/v1.0/sees.xml`](../../message_definitions/v1.0/sees.xml)); PX4 and sender changes pending
 **Target:** PX4 v1.17 (mavlink branch `33af200_dev`, based on upstream `33af200d`)
